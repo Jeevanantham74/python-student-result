@@ -1,15 +1,29 @@
 import sys
 
-def evaluate_performance(mark1, mark2, mark3):
+
+def calculate_total_and_average(mark1, mark2, mark3):
     total = mark1 + mark2 + mark3
     average = total / 3
+    return total, average
 
-    if mark1 >= 40 and mark2 >= 40 and mark3 >= 40:
-        status = "PASS"
+
+def calculate_grade(average):
+    if average >= 90:
+        return "A"
+    elif average >= 80:
+        return "B"
+    elif average >= 70:
+        return "C"
+    elif average >= 60:
+        return "D"
     else:
-        status = "FAIL"
+        return "F"
 
-    return total, average, status
+
+def evaluate_performance(mark1, mark2, mark3):
+    total, average = calculate_total_and_average(mark1, mark2, mark3)
+    grade = calculate_grade(average)
+    return total, average, grade
 
 
 # Get marks from command-line arguments
@@ -21,7 +35,8 @@ else:
     # Default marks for manual execution
     sub1, sub2, sub3 = 75.0, 62.0, 45.0
 
-total, average, status = evaluate_performance(sub1, sub2, sub3)
+
+total, average, grade = evaluate_performance(sub1, sub2, sub3)
 
 print("\n=== Jenkins Student Report Card ===")
 print(f"Subject 1 Marks : {sub1}")
@@ -30,5 +45,5 @@ print(f"Subject 3 Marks : {sub3}")
 print("-----------------------------------")
 print(f"Total Marks     : {total}")
 print(f"Average Score   : {average:.2f}%")
-print(f"Final Decision  : {status}")
+print(f"Grade           : {grade}")
 print("===================================\n")
